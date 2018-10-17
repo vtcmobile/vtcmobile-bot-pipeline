@@ -1,13 +1,14 @@
 # coding=utf-8
 import os
 import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 import json
 from datetime import datetime
 
 import requests
 from flask import Flask, request
 
-sys.setdefaultencoding('utf-8')
 app = Flask(__name__)
 
 
