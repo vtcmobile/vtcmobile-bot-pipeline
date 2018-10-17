@@ -19,7 +19,8 @@ def verify():
             return "Verification token mismatch", 403
         return request.args["hub.challenge"], 200
 
-return "Chào bạn, bạn vui lòng liên hệ kênh hỗ trợ Scoin của chúng tôi tại địa chỉ m.me/scoinvtcmobile hoặc gọi đến tổng đài 19001104 để được hỗ trợ.".encode('utf-8'), 200
+sreturn="Chào bạn, bạn vui lòng liên hệ kênh hỗ trợ Scoin của chúng tôi tại địa chỉ m.me/scoinvtcmobile hoặc gọi đến tổng đài 19001104 để được hỗ trợ.".encode('utf-8')
+return sreturn, 200
 
 
 
