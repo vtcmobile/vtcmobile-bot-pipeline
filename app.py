@@ -43,7 +43,7 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                    send_message(sender_id, "Chào bạn, bạn vui lòng liên hệ kênh hỗ trợ Scoin của chúng tôi tại địa chỉ m.me/scoinvtcmobile hoặc gọi đến tổng đài 19001104 để được hỗ trợ.".encode('utf-8'))
+                    send_message(sender_id, "Chào bạn, bạn vui lòng liên hệ kênh hỗ trợ Scoin của chúng tôi tại địa chỉ m.me/scoinvtcmobile hoặc gọi đến tổng đài 19001104 để được hỗ trợ.")
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
@@ -86,9 +86,9 @@ def log(msg, *args, **kwargs):  # simple wrapper for logging to stdout on heroku
         if type(msg) is dict:
             msg = json.dumps(msg)
         else:
-            #msg = unicode(msg).format(*args, **kwargs)
-            msg = msg.format(*args, **kwargs)
-        print "{}: {}".format(datetime.now(), msg)
+            msg = unicode(msg).format(*args, **kwargs)
+            #msg = msg.format(*args, **kwargs)
+        print u"{}: {}".format(datetime.now(), msg)
     except UnicodeEncodeError:
         pass  # squash logging errors in case of non-ascii text
     sys.stdout.flush()
