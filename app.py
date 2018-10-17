@@ -65,7 +65,7 @@ def send_message(recipient_id, message_text):
         "access_token": os.environ["PAGE_ACCESS_TOKEN"]
     }
     headers = {
-        "Content-Type": "application/json"
+        "Content-Type": "text/plain; charset=utf-8"
     }
     data = json.dumps({
         "recipient": {
