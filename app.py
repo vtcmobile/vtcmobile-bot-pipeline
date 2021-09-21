@@ -13,15 +13,13 @@ app = Flask(__name__)
 
 @app.route('/bot-telegram', methods=['GET'])
 def verify_bot_telegram():
-    # when the endpoint is registered as a webhook, it must echo back
-    # the 'hub.challenge' value it receives in the query arguments
-    if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
-        if not request.args.get("hub.verify_token") == os.environ["VERIFY_TOKEN"]:
-            return "Verification token mismatch", 403
-        return request.args["hub.challenge"], 200
-    
+    r = requests.get("http://mobile.vtc.vn/tool/inside/aspnet_client/auto/bot-telegram/bot_services.aspx")
     return "Telegram- VTC Mobile", 200
 
+@app.route('/bot-telegram', methods=['POST'])
+def update_bot_telegram():
+    r = requests.get("http://mobile.vtc.vn/tool/inside/aspnet_client/auto/bot-telegram/bot_services.aspx")
+    return "Telegram- VTC Mobile", 200
 
 @app.route('/', methods=['GET'])
 def verify():
