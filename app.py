@@ -20,19 +20,19 @@ def verify_bot_telegram():
 def update_bot_telegram():
     data = request.get_json()
 
-    stext_telegram = ''
-    s_channel_id = '' 
-    if data['message']:
-        stext_telegram = data['message']['text']
-    if data['edited_message']:
-        stext_telegram = data['edited_message']['text']
-    if data['message']:
-        s_channel_id = data['message']['chat']['id']
-    if data['edited_message']:
-        s_channel_id   = data['edited_message']['chat']['id']
+    stext_telegram = ""
+    s_channel_id = "" 
+    if data.get("message"):  
+        stext_telegram = data["message"]["text"]
+    if data.get("edited_message"):  
+        stext_telegram = data["edited_message"]["text"]
+    if data.get("message"): 
+        s_channel_id = data["message"]["chat"]["id"]
+    if data.get("edited_message"): 
+        s_channel_id   = data["edited_message"]["chat"]["id"]
         
-    log('stext_telegram=' + stext_telegram)
-    log('s_channel_id=' + s_channel_id)
+    log("stext_telegram=" + stext_telegram)
+    log("s_channel_id=" + s_channel_id)
     
     payload = {'stext_telegram': stext_telegram,'s_channel_id': s_channel_id}
     r = requests.get("http://mobile.vtc.vn/tool/inside/aspnet_client/auto/bot-telegram/bot_services.aspx", params=payload)
