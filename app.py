@@ -31,8 +31,10 @@ def update_bot_telegram():
     if data.get("edited_message"): 
         s_channel_id   = data["edited_message"]["chat"]["id"]
         
-    log("stext_telegram=" + stext_telegram)
-    log("s_channel_id=" + s_channel_id)
+    log("stext_telegram=")
+    log(stext_telegram)
+    log("s_channel_id=")
+    log(s_channel_id)
     
     payload = {'stext_telegram': stext_telegram,'s_channel_id': s_channel_id}
     r = requests.get("http://mobile.vtc.vn/tool/inside/aspnet_client/auto/bot-telegram/bot_services.aspx", params=payload)
