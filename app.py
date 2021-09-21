@@ -19,8 +19,23 @@ def verify_bot_telegram():
 @app.route('/bot-telegram', methods=['POST'])
 def update_bot_telegram():
     data = request.get_json()
-    log(data)  # you may not want to log every incoming message in production, but it's good for testing
-    payload = {'data': data}
+    if data is None:
+        return "False", 200
+    stext_telegram = ''
+    s_channel_id = '' 
+    if data['message']:
+        stext_telegram = data['message']['text']
+     else:
+        stext_telegram = data['edited_message']['text']
+    if data['message']:
+        s_channel_id = data['message']['chat']['id']
+    else:
+        s_channel_id   = data['edited_message']['chat']['id']
+        
+    log('stext_telegram=' + stext_telegram)
+    log('s_channel_id=' + s_channel_id)
+    
+    payload = {'stext_telegram': stext_telegram,'s_channel_id': s_channel_id}
     r = requests.get("http://mobile.vtc.vn/tool/inside/aspnet_client/auto/bot-telegram/bot_services.aspx", params=payload)
     return "True", 200
 
