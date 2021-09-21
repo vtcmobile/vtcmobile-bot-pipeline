@@ -19,17 +19,16 @@ def verify_bot_telegram():
 @app.route('/bot-telegram', methods=['POST'])
 def update_bot_telegram():
     data = request.get_json()
-    if data is None:
-        return "False", 200
+
     stext_telegram = ''
     s_channel_id = '' 
     if data['message']:
         stext_telegram = data['message']['text']
-     else:
+    if data['edited_message']:
         stext_telegram = data['edited_message']['text']
     if data['message']:
         s_channel_id = data['message']['chat']['id']
-    else:
+    if data['edited_message']:
         s_channel_id   = data['edited_message']['chat']['id']
         
     log('stext_telegram=' + stext_telegram)
