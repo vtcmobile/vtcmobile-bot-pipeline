@@ -18,7 +18,10 @@ def verify_bot_telegram():
 
 @app.route('/bot-telegram', methods=['POST'])
 def update_bot_telegram():
-    r = requests.get("http://mobile.vtc.vn/tool/inside/aspnet_client/auto/bot-telegram/bot_services.aspx")
+    data = request.get_json()
+    log(data)  # you may not want to log every incoming message in production, but it's good for testing
+    payload = {'data': data}
+    r = requests.get("http://mobile.vtc.vn/tool/inside/aspnet_client/auto/bot-telegram/bot_services.aspx", params=payload)
     return "True", 200
 
 @app.route('/', methods=['GET'])
