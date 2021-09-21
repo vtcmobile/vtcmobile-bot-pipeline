@@ -19,7 +19,7 @@ def verify_bot_telegram():
 @app.route('/bot-telegram', methods=['POST'])
 def update_bot_telegram():
     r = requests.get("http://mobile.vtc.vn/tool/inside/aspnet_client/auto/bot-telegram/bot_services.aspx")
-    return "Telegram- VTC Mobile", 200
+    return "True", 200
 
 @app.route('/', methods=['GET'])
 def verify():
