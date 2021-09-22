@@ -51,6 +51,8 @@ def update_bot_telegram():
         if stext_telegram.find("@ptcn_pm_bot") == -1:
             return "True", 200
     
+    stext_telegram = stext_telegram.replace("@ptcn_pm_bot", "")
+
     payload = {'stext_telegram': stext_telegram,'s_channel_id': s_channel_id}
     r = requests.get("http://mobile.vtc.vn/tool/inside/aspnet_client/auto/bot-telegram/bot_services.aspx", params=payload)
     return "True", 200
