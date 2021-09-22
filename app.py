@@ -34,7 +34,10 @@ def update_bot_telegram():
     log("---------------------------------------")    
     log("stext_telegram=" + str(stext_telegram))
     log("s_channel_id="+ str(s_channel_id))
- 
+
+    if s_channel_id < 0: # filter @mention message only
+        if stext_telegram.find("@ptcn_pm_bot") == -1:
+            return "True", 200
     
     payload = {'stext_telegram': stext_telegram,'s_channel_id': s_channel_id}
     r = requests.get("http://mobile.vtc.vn/tool/inside/aspnet_client/auto/bot-telegram/bot_services.aspx", params=payload)
