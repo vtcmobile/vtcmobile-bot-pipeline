@@ -23,9 +23,11 @@ def update_bot_telegram():
     stext_telegram = ""
     s_channel_id = "" 
     if data.get("message"):  
-        stext_telegram = data["message"]["text"]
+        if data.get("message").get("text"):  
+            stext_telegram = data["message"]["text"]
     if data.get("edited_message"):  
-        stext_telegram = data["edited_message"]["text"]
+        if data.get("edited_message").get("text"):  
+            stext_telegram = data["edited_message"]["text"]
     if data.get("message"): 
         s_channel_id = data["message"]["chat"]["id"]
     if data.get("edited_message"): 
