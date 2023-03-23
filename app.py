@@ -11,52 +11,6 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-@app.route('/bot-telegram', methods=['GET'])
-def verify_bot_telegram():
-    r = requests.get("http://mobile.vtc.vn/tool/inside/aspnet_client/auto/bot-telegram/bot_services.aspx")
-    return "Telegram- VTC Mobile", 200
-
-@app.route('/bot-telegram', methods=['POST'])
-def update_bot_telegram():
-    data = request.get_json()
-
-    stext_telegram = ""
-    s_channel_id = "" 
-    
-    stext_telegram_1=""
-    stext_telegram_2=""
-    
-    if data.get("message"):  
-        if data.get("message").get("text"):  
-            stext_telegram_1 = data["message"]["text"].strip()
-    if data.get("edited_message"):  
-        if data.get("edited_message").get("text"):  
-            stext_telegram_2 = data["edited_message"]["text"].strip()
-            
-    if stext_telegram_1 != "":
-        stext_telegram = stext_telegram_1
-    if stext_telegram_2 != "":
-        stext_telegram = stext_telegram_2
-        
-    if data.get("message"): 
-        s_channel_id = data["message"]["chat"]["id"]
-    if data.get("edited_message"): 
-        s_channel_id   = data["edited_message"]["chat"]["id"]
-
-    log("---------------------------------------")    
-    log("stext_telegram=" + str(stext_telegram))
-    log("s_channel_id="+ str(s_channel_id))
-
-    if s_channel_id < 0: # filter @mention message only
-        if stext_telegram.find("@ptcn_pm_bot") == -1:
-            return "True", 200
-    
-    stext_telegram = stext_telegram.replace("@ptcn_pm_bot", "")
-
-    payload = {'stext_telegram': stext_telegram,'s_channel_id': s_channel_id}
-    r = requests.get("http://mobile.vtc.vn/tool/inside/aspnet_client/auto/bot-telegram/bot_services.aspx", params=payload)
-    return "True", 200
-
 @app.route('/', methods=['GET'])
 def verify():
     # when the endpoint is registered as a webhook, it must echo back
